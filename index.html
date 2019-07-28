@@ -1,0 +1,132 @@
+<html>
+    <head>
+        <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="mustache.min.js"></script>
+        <script type="text/javascript" src="bigvoca.js"></script>
+        <script>
+            function analizeText() {
+                var text = document.querySelector('textarea[name="text"]').value;
+                var template = $('#word-template').html();
+                var coretemplate = $('#bigvoca-core-word-template').html();
+                var advancedtemplate = $('#bigvoca-advanced-word-template').html();
+                var etctemplate = $('#etc-word-template').html();
+
+                // var html = Mustache.render(template, { 'words' : getWordList(text) });
+                // $('#DisplayWordList').html(html);
+
+                var corehtml = Mustache.render(coretemplate, { 'words' : getBigVocaCoreWordList(text) });
+                $('#DisplayBigVocaCoreWordList').html(corehtml);
+
+                var advancedhtml = Mustache.render(advancedtemplate, { 'words' : getBigVocaAdvancedWordList(text) });
+                $('#DisplayBigVocaAdvancedWordList').html(advancedhtml);
+
+                var etchtml = Mustache.render(etctemplate, { 'words' : getEtcWordList(text) });
+                $('#DisplayEtcWordList').html(etchtml);
+            }
+        </script>
+        <style>
+            .word {
+                border: solid green 1px;
+                margin-bottom: 2px;
+                padding: 5px 20px 5px 20px;
+            }
+            .coreword {
+                border: solid blue 1px;
+                margin-bottom: 2px;
+                padding: 5px 20px 5px 20px;
+            }
+            .advancedword {
+                border: solid yellow 1px;
+                margin-bottom: 2px;
+                padding: 5px 20px 5px 20px;
+            }
+            .etcword {
+                border: solid orange 1px;
+                margin-bottom: 2px;
+                padding: 5px 20px 5px 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+        <textarea cols="80" rows="30" name="text">
+When I find myself in times of trouble,  Mother Mary comes to me
+Speaking words of wisdom, let it be
+And in my hour of darkness she is    standing right in front of me
+Speaking words of wisdom, let it be
+Let it be, let it be, let it be, let      it be
+Whisper words of wisdom, let it be
+And when the broken-hearted people   living in the world agree
+There will be an answer, let it be
+For though they may be parted, there             is still a chance that they will see
+There will be an answer, let             it be
+Let it be, let it be, let it be, let it be
+Yeah, there will be an answer, let it be
+Let it be, let it be, let it be, let it be
+Whisper words of wisdom, let it be
+Let it be, let it be, let it be, yeah, let it be
+Whisper words of wisdom, let it be
+And when the night is cloudy there is still a light that shines on me
+Shine until tomorrow, let it be
+I wake up to the sound of music, Mother Mary comes to me
+Speaking words of wisdom, let it be
+Let it be, let it be, let it be, yeah, let it be
+There will be an answer, let it be
+Let it be, let it be, let it be, yeah, let it be
+There will be an answer, let it be
+Let it be, let it be, let it be, yeah, let it be
+Whisper words of wisdom, let it be
+        </textarea>
+        <input type="button" onclick="analizeText();" value="Start" />
+        </div>
+        <div id="DisplayWordList"></div>
+        <div id="DisplayBigVocaCoreWordList"></div>
+        <div id="DisplayBigVocaAdvancedWordList"></div>
+        <div id="DisplayEtcWordList"></div>
+
+        <script type="text/x-mustache" id="word-template">
+            {{#words}}
+            <div class='word'>
+                <div class='text'>Word: {{word}}</div>
+                <div class='count'>Count: {{count}}</div>
+                <div class='isBigVocaCore'>BigVocaCore: {{isBigVocaCore}}</div>
+                <div class='isBigVocaAdvanced'>BigVocaAdvnaced: {{isBigVocaAdvanced}}</div>
+            </div>
+            {{/words}}
+        </script>
+
+        <script type="text/x-mustache" id="bigvoca-core-word-template">
+            {{#words}}
+            <div class='coreword'>
+                <div class='text'>Word: {{word}}</div>
+                <div class='count'>Count: {{count}}</div>
+                <div class='isBigVocaCore'>BigVocaCore: {{isBigVocaCore}}</div>
+                <div class='isBigVocaAdvanced'>BigVocaAdvnaced: {{isBigVocaAdvanced}}</div>
+            </div>
+            {{/words}}
+        </script>
+
+        <script type="text/x-mustache" id="bigvoca-advanced-word-template">
+            {{#words}}
+            <div class='advancedword'>
+                <div class='text'>Word: {{word}}</div>
+                <div class='count'>Count: {{count}}</div>
+                <div class='isBigVocaCore'>BigVocaCore: {{isBigVocaCore}}</div>
+                <div class='isBigVocaAdvanced'>BigVocaAdvnaced: {{isBigVocaAdvanced}}</div>
+            </div>
+            {{/words}}
+        </script>
+
+        <script type="text/x-mustache" id="etc-word-template">
+            {{#words}}
+            <div class='etcword'>
+                <div class='text'>Word: {{word}}</div>
+                <div class='count'>Count: {{count}}</div>
+                <div class='isBigVocaCore'>BigVocaCore: {{isBigVocaCore}}</div>
+                <div class='isBigVocaAdvanced'>BigVocaAdvnaced: {{isBigVocaAdvanced}}</div>
+            </div>
+            {{/words}}
+        </script>
+
+    </body>
+</html>

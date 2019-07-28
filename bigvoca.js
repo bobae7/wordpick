@@ -56,36 +56,25 @@ var Words = /** @class */ (function () {
 }());
 
 var WordsInstance;
-
 var InitWordsInstance = function (text) {
-    WordsInstance = new Words(text);
-    WordsInstance.initText();
-}
-
-var getWordList = function (text) {
     if (!WordsInstance || WordsInstance.text !== text) {
-        InitWordsInstance(text);
+        WordsInstance = new Words(text);
+        WordsInstance.initText();
     }
+};
+var getWordList = function (text) {
+    InitWordsInstance(text);
     return WordsInstance.wordList;
 };
-
 var getBigVocaCoreWordList = function (text) {
-    if (!WordsInstance || WordsInstance.text !== text) {
-        InitWordsInstance(text);
-    }
+    InitWordsInstance(text);
     return WordsInstance.wordList.filter(function (word) { return word.isBigVocaCore; })
 };
-
 var getBigVocaAdvancedWordList = function (text) {
-    if (!WordsInstance || WordsInstance.text !== text) {
-        InitWordsInstance(text);
-    }
+    InitWordsInstance(text);
     return WordsInstance.wordList.filter(function (word) { return word.isBigVocaAdvanced; })
 };
-
 var getEtcWordList = function (text) {
-    if (!WordsInstance || WordsInstance.text !== text) {
-        InitWordsInstance(text);
-    }
+    InitWordsInstance(text);
     return WordsInstance.wordList.filter(function (word) { return !word.isBigVocaCore && !word.isBigVocaAdvanced; })
-}
+};
